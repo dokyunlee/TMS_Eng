@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Message Studio</title>
+  <meta name="description" content="An SDT-based Crowd Task Message Design System that designs before- and after-task messages by considering the worker's intrinsic motivation and task experience.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=20260827-square-ui-v8">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.321.0/font/lucide.min.css">
+
+  <!-- Completion animation -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="requester-mode">
+
+  <div class="app-container">
+
+    <!-- Main App Navigation Header -->
+    <header>
+      <div class="logo-container">
+        <div>
+          <h1 class="logo-text">Task Message Studio</h1>
+        </div>
+      </div>
+
+      <nav class="nav-tabs overview-nav" aria-label="Requester navigation">
+        <button id="nav-tab-requester" type="button" class="nav-tab-btn active" aria-label="Go to Overview">Overview</button>
+        <button id="nav-why-sdt" type="button" class="nav-tab-btn" aria-label="Go to Self-Determination Theory explanation">Why SDT</button>
+        <button id="nav-how-it-works" type="button" class="nav-tab-btn" aria-label="Go to how it works">How It Works</button>
+        <button id="nav-workspace" type="button" class="nav-tab-btn nav-workspace-btn hidden" aria-label="Go to Requester Workspace"><i class="lucide-clipboard-edit"></i>Workspace</button>
+      </nav>
+    </header>
+
+    <!-- Master SPA View Frame -->
+    <main>
+
+      <!-- ====================================================================
+           REQUESTER VIEWPORT
+           ==================================================================== -->
+      <section id="requester-view" class="requester-container">
+        <section id="platform-overview" class="landing-hero purpose-hero" aria-labelledby="landing-title">
+          <h2 id="landing-title">What difference can a task message make to a worker's experience?</h2>
+          <p class="hero-lead">A Crowd Task Message Design System that considers the crowd worker's intrinsic motivation and task experience</p>
+          <p class="hero-support">Task Message Studio designs before- and after-task communication tailored to each task's characteristics, so workers can understand the meaning of the task and their own contribution.</p>
+        </section>
+
+        <section id="why-motivation" class="overview-section motivation-section" aria-labelledby="motivation-title">
+          <div class="landing-section-heading">
+            <h2 id="motivation-title">Why do we work?</h2>
+            <p>Some work we do because it is enjoyable or satisfying in itself.<br>Some work we do to obtain a reward or an outcome.</p>
+          </div>
+
+          <div class="motivation-compare-grid" aria-label="Comparing intrinsic and extrinsic motivation">
+            <article class="motivation-definition-card" data-motivation="intrinsic">
+              <div class="motivation-card-heading"><i class="lucide-lightbulb" aria-hidden="true"></i></div>
+              <h3>Intrinsic Motivation</h3>
+              <strong>Motivation from the work itself</strong>
+              <p>Motivation to act because the activity itself is fun, interesting, or satisfying.</p>
+            </article>
+            <article class="motivation-definition-card" data-motivation="extrinsic">
+              <div class="motivation-card-heading"><i class="lucide-circle-dollar-sign" aria-hidden="true"></i></div>
+              <h3>Extrinsic Motivation</h3>
+              <strong>Motivation from an external outcome</strong>
+              <p>Motivation to act in order to obtain a reward, evaluation, recognition, or a specific outcome.</p>
+            </article>
+          </div>
+
+          <div class="crowd-motivation-block" aria-labelledby="crowd-example-title">
+            <div class="motivation-subheading"><h3 id="crowd-example-title">This can show up as follows in crowd work.</h3></div>
+            <div class="crowd-example-grid">
+              <article><blockquote>"The results of this task are used to improve the quality of AI data."</blockquote><p>The worker can understand why the task is needed and the meaning of their contribution.</p></article>
+              <article><blockquote>"You will receive a reward for completing this task."</blockquote><p>The worker can take part in the task with the external outcome of a reward in mind.</p></article>
+            </div>
+          </div>
+
+          <div class="crowd-work-meaning" aria-labelledby="crowd-meaning-title">
+            <div><h3 id="crowd-meaning-title">So what about crowd work?</h3></div>
+            <div class="crowd-work-copy"><p><strong>Monetary reward matters in crowd work.</strong> Task Message Studio is not a system that denies or tries to replace the importance of reward.</p><p>Instead, it supports task communication so that workers experience the task as more than just "something you do to get paid" — helping them understand their own judgment, the meaning of the task, and their contribution.</p></div>
+          </div>
+
+        </section>
+
+        <section id="why-sdt" class="overview-section sdt-section" aria-labelledby="sdt-title">
+          <div class="landing-section-heading">
+            <h2 id="sdt-title">Three basic psychological needs that support a crowd worker's task experience</h2>
+            <p>Self-Determination Theory (SDT) explains that the more Autonomy, Competence, and Relatedness are satisfied, the more favorable the conditions become for voluntary engagement and sustained intrinsic motivation.</p>
+          </div>
+          <div class="sdt-card-grid">
+            <article class="sdt-card" data-sdt="autonomy"><i class="lucide-sliders-horizontal"></i><h3>Autonomy</h3><blockquote>"I can choose and judge for myself."</blockquote><p>Supports workers in feeling that their judgment and choices are respected, rather than overly controlled.</p></article>
+            <article class="sdt-card" data-sdt="competence"><i class="lucide-badge-check"></i><h3>Competence</h3><blockquote>"I can do this task well."</blockquote><p>Recognizes the worker's judgment and ability to contribute, supporting a sense that they can perform effectively.</p></article>
+            <article class="sdt-card" data-sdt="relatedness"><i class="lucide-users"></i><h3>Relatedness</h3><blockquote>"My work is connected to someone."</blockquote><p>Supports the feeling that one's contribution is connected to other people or to a larger purpose.</p></article>
+          </div>
+        </section>
+
+        <section id="why-task-messages" class="overview-section message-bridge-section" aria-labelledby="message-bridge-title">
+          <div class="message-bridge-copy">
+            <h2 id="message-bridge-title">The message is the first point of contact between requester and worker.</h2>
+            <p>Even for the same task, how the message is delivered can change the meaning and motivation a worker experiences. Task Message Studio first analyzes the task's characteristics, then selects or prioritizes the needed SDT elements before reflecting them in the worker message.</p>
+          </div>
+          <ol class="system-pipeline" aria-label="SDT-based message design process">
+            <li><span>01</span><strong>Task</strong></li><li><span>02</span><strong>Task Analysis</strong></li><li><span>03</span><strong>SDT Need Selection</strong></li><li><span>04</span><strong>LLM Message Generation</strong></li><li><span>05</span><strong>Worker Experience</strong></li>
+          </ol>
+        </section>
+
+        <section id="survey-evidence" class="overview-section survey-evidence-section" aria-labelledby="survey-evidence-title">
+          <div class="survey-evidence">
+            <div class="survey-evidence-heading">
+              <div>
+                <h2 id="survey-evidence-title">Crowdworker Survey (N=120)</h2>
+              </div>
+            </div>
+            <p class="survey-evidence-summary"><strong>In our preliminary study, we surveyed 120 crowdworkers.</strong> The Core and Supporting Frames are determined from workers' preferred motivational framing for each task type.</p>
+            <div class="survey-evidence-table-wrap" tabindex="0" aria-label="Table of survey-based frame priority by Task Type">
+              <table class="survey-evidence-table">
+                <thead>
+                  <tr><th scope="col">Task Type</th><th scope="col">Core</th><th scope="col">Supporting</th><th scope="col">3rd</th></tr>
+                </thead>
+                <tbody id="survey-evidence-table-body"></tbody>
+              </table>
+            </div>
+            <p class="survey-evidence-note">1st place is applied as Core and 2nd place as Supporting during generation. 3rd place is for reference only and is not used in message generation.</p>
+            <div class="message-length-evidence">
+              <div class="message-length-heading">
+                <span class="message-length-label">Message Length</span>
+                <strong class="message-length-value">4–5 sentences</strong>
+              </div>
+              <p class="message-length-summary"><strong>Medium length was preferred by 66.7% (80/120) of surveyed crowdworkers.</strong> The system operationalizes this preference as 4–5 sentences for each Before-task and After-task message.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="worker-experience" class="overview-section worker-experience-section" aria-labelledby="worker-experience-title">
+          <div class="landing-section-heading">
+            <h2 id="worker-experience-title">Messages written together by our system and the requester are delivered to the worker before they start the task and after they finish it.</h2>
+            <p>Not every message fixes all three elements. The system analyzes the task's burden and responsibility, repetitiveness, and social meaning to prioritize the support that is actually needed.</p>
+          </div>
+          <div class="worker-preview-grid">
+            <article class="worker-flow-preview">
+              <div class="preview-phase"><span>Before-task</span></div>
+              <div class="worker-preview-image">
+                <img src="assets/worker-experience/worker-before-task.png?v=20260824" width="1418" height="1234" loading="lazy" alt="Actual pre-task screen for a Virtual Receipt OCR task">
+              </div>
+              <div id="worker-before-frame-keywords" class="message-annotations" aria-live="polite"></div>
+            </article>
+            <article class="worker-flow-preview">
+              <div class="preview-phase"><span>After-task</span></div>
+              <div class="worker-preview-image">
+                <img src="assets/worker-experience/worker-after-task.png?v=20260826-mw2-post" width="759" height="632" loading="lazy" alt="Post-task message screen after receipt review is complete">
+              </div>
+              <div id="worker-after-frame-keywords" class="message-annotations" aria-live="polite"></div>
+            </article>
+          </div>
+          <div class="worker-flow-line" aria-label="Message flow from requester to worker"><span>Requester</span><i class="lucide-arrow-right" aria-hidden="true"></i><span>Task Information</span><i class="lucide-arrow-right" aria-hidden="true"></i><span>SDT Analysis</span><i class="lucide-arrow-right" aria-hidden="true"></i><span>Before Message</span><i class="lucide-arrow-right" aria-hidden="true"></i><span>Task</span><i class="lucide-arrow-right" aria-hidden="true"></i><span>After Message</span></div>
+        </section>
+
+        <section id="how-it-works" class="overview-section how-section" aria-labelledby="how-title">
+          <div class="landing-section-heading">
+            <h2 id="how-title">Now see the design flow in the actual screens.</h2>
+          </div>
+          <ol class="how-preview-steps">
+            <li><div class="how-step-copy"><span>Step 1</span><h3>Enter task information</h3><p>Enter the task purpose, Task Type, what the worker will do, and message reference information.</p></div><div class="mini-ui-preview"><label>Task title</label><div class="mini-form-control">Road scene object classification</div><label>What the worker will do</label><div class="mini-form-control muted">Classify pedestrians, vehicles, obstacles</div></div></li>
+            <li><div class="how-step-copy"><span>Step 2</span><h3>Analyze task characteristics</h3><p>Check the core and supporting message strategies linked to the selected Task Type.</p></div><div class="mini-ui-preview"><small>Applied Message Strategy</small><div class="mini-support-row"><b>Competence</b><span>Core</span></div><div class="mini-support-row"><b>Relatedness</b><span>Supporting</span></div><p>Uses the fixed mapping for each Task Type as the message design criteria.</p></div></li>
+            <li><div class="how-step-copy"><span>Step 3</span><h3>Generate strategy-based messages</h3><p>Generates Before / After candidate messages based on the core and supporting strategies.</p></div><div class="mini-ui-preview mini-candidates"><div><span class="candidate-frame-tag">Competence</span><p>Careful judgment improves data quality…</p></div><div><span class="candidate-frame-tag">Relatedness</span><p>The time and effort you gave…</p></div></div></li>
+            <li><div class="how-step-copy"><span>Step 4</span><h3>Review and edit the message</h3><p>Check the applied core and supporting strategies, then select and edit the message.</p></div><div class="mini-ui-preview"><div class="mini-review-title"><i class="lucide-badge-check"></i><b>Competence</b><span>Core</span></div><p>Since careful judgment matters for this task, check the wording that recognizes the worker's judgment ability.</p><div class="mini-textarea">You can edit the final message directly.</div></div></li>
+            <li><div class="how-step-copy"><span>Step 5</span><h3>Deliver to the worker</h3><p>Generate the Worker Link. The worker experiences the before- and after-task messages.</p></div><div class="mini-ui-preview"><small>Worker access URL</small><div class="mini-share-link">https://…/#worker?taskId=… <i class="lucide-copy"></i></div><div class="mini-worker-flow"><span>Before</span><i class="lucide-arrow-right"></i><span>Task</span><i class="lucide-arrow-right"></i><span>After</span></div></div></li>
+          </ol>
+        </section>
+
+        <section id="onboarding-ready" class="start-design-section" aria-label="Start message design">
+          <button id="btn-start-designing" type="button" class="btn btn-primary"><i class="lucide-clipboard-edit"></i>Start Message Design</button>
+        </section>
+
+        <div id="workspace-shell" class="workspace-shell hidden" aria-hidden="true">
+        <section id="requester-workspace" class="workspace-entry" aria-labelledby="workspace-title-heading">
+          <div class="workspace-entry-copy"><h2 id="workspace-title-heading">First, tell us about the task.</h2><p>Based on what you enter, we analyze the task's characteristics and the motivational strategy the worker needs.</p></div>
+          <div class="workspace-sdt-context"><div><strong>Strategy-based Message Design</strong><span>Applies the core and supporting strategies of Autonomy · Competence · Relatedness based on the selected Task Type.</span></div><button id="btn-workspace-sdt" type="button" class="btn btn-secondary-quiet">Why SDT?</button></div>
+          <ol id="requester-progress" class="requester-progress" aria-label="Message design progress">
+            <li class="active" data-workflow-step="input" aria-current="step"><span>1</span><strong>Task Info</strong></li>
+            <li data-workflow-step="generate"><span>2</span><strong>Generate Message</strong></li>
+            <li data-workflow-step="review"><span>3</span><strong>Review Message</strong></li>
+            <li data-workflow-step="publish"><span>4</span><strong>Deploy to Worker</strong></li>
+          </ol>
+        </section>
+
+        <div class="requester-layout">
+          <!-- Left Column: Requester Form -->
+          <div class="glass-card" style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+            <!-- Task Specifications Form -->
+            <div>
+              <div class="requester-form-heading">
+                <div>
+                  <h3 class="section-title"><i class="lucide-file-text"></i>Task Information</h3>
+                </div>
+                <div class="example-help">
+                  <button type="button" class="example-help-btn" aria-expanded="false" aria-label="View a task information example">?</button>
+                  <div class="example-help-popover" role="tooltip">
+                    <strong>Example of basic task information</strong>
+                    <dl>
+                      <div><dt>Task title</dt><dd>Road scene object classification</dd></div>
+                      <div><dt>What the worker will do</dt><dd>Classify pedestrians, vehicles, and obstacles in the marked area</dd></div>
+                      <div><dt>Judgment criteria</dt><dd>### Task overview<br>Review the target image.<br><br>### Detailed guidelines<br>1. Mark occluded objects as unable to judge<br>2. If a pedestrian is present, classify it first</dd></div>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+              <div class="example-task-section" aria-labelledby="example-task-title">
+                <div class="example-task-heading"><strong id="example-task-title">Template</strong><span>Selecting a task type will auto-fill the input values.</span></div>
+                <div id="example-task-presets" class="test-case-presets" aria-label="Auto-fill example task by task type"></div>
+              </div>
+
+              <div id="form-completion-card" class="form-completion-card" aria-live="polite">
+                <div><strong id="form-completion-text">Required fields 0 / 5</strong></div>
+                <p class="field-help" style="margin-top: 0.25rem;">Once you fill in the required fields, you can generate the message right away. Task information is also saved to the server when deployed.</p>
+                <div class="form-completion-track"><div id="form-completion-fill" class="form-completion-fill"></div></div>
+              </div>
+
+              <form id="task-form" onsubmit="return false;">
+                <div class="requester-basic-form">
+                  <div class="form-group">
+                    <label for="task-title">Task title</label>
+                    <input type="text" id="task-title" class="form-control" placeholder="e.g. Classify pedestrians and obstacles in road images" value="">
+                    <p class="field-help">Enter a short title the worker can understand right away from a list.</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="task-objective">What the worker will do</label>
+                    <input type="text" id="task-objective" class="form-control" placeholder="e.g. Classify traffic obstacles within the marked area" value="">
+                    <p class="field-help">Write the judgment target and action in one sentence.</p>
+                  </div>
+
+                  <div class="form-group form-group-with-format-help">
+                    <div class="field-heading-row">
+                      <label for="task-desc">Judgment criteria & detailed guidelines</label>
+                      <div class="example-help example-help-format">
+                        <button type="button" class="example-help-btn example-help-btn-micro" aria-expanded="false" aria-label="View the detailed-guideline format">?</button>
+                        <div class="example-help-popover example-format-popover" role="tooltip">
+                          <strong>Try writing it in this format</strong>
+                          <pre>## Task overview
+Check for pedestrians, vehicles, and obstacles in the image.
+
+### Detailed guidelines
+1. Mark occluded or blurry objects as **unable to judge**.
+2. Choose only the single most important item per image.</pre>
+                          <p><code>##</code> renders as a large heading, <code>###</code> as a small heading, and <code>**text**</code> as bold emphasis.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <textarea id="task-desc" class="form-control" placeholder="e.g.
+## Task overview
+Check for pedestrians, vehicles, and obstacles in the image.
+
+### Detailed guidelines
+1. Mark occluded or blurry objects as **unable to judge**.
+2. Choose only the single most important item per image."></textarea>
+                    <p class="field-help">Your input is preserved exactly as written. Use ## for a large heading, ### for a small heading, and **text** for emphasis.</p>
+                  </div>
+
+                  <div class="requester-form-heading requester-context-heading">
+                    <div>
+                      <h3 class="section-title"><i class="lucide-sliders-horizontal"></i>Task Information</h3>
+                    </div>
+                    <div class="example-help">
+                      <button type="button" class="example-help-btn" aria-expanded="false" aria-label="View a message reference information example">?</button>
+                      <div class="example-help-popover" role="tooltip">
+                        <strong>Example of message reference information</strong>
+                        <dl>
+                          <div><dt>Emotional burden</dt><dd>Medium</dd></div>
+                          <div><dt>Repetition/focus burden</dt><dd>Medium</dd></div>
+                          <div><dt>Contribution of the task output</dt><dd>Improves the quality of road hazard recognition data used for safety review</dd></div>
+                          <div><dt>Task flow</dt><dd>Repeatedly distinguishing small objects</dd></div>
+                          <div><dt>Reward · Time</dt><dd>USD 1.80 · 12 minutes per task</dd></div>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+
+                    <fieldset class="task-type-fieldset">
+                      <legend>Task Type</legend>
+                      <p class="field-help">Choose the classification that fits the task content. The core and supporting strategies of the selected type are applied to message generation.</p>
+                      <div id="task-type-options" class="task-type-card-grid" role="radiogroup" aria-label="Select Task Type"></div>
+                    </fieldset>
+
+                    <div class="form-grid-2 compact-field-row">
+                      <div class="form-group">
+                        <label for="task-risk-level">Emotional burden</label>
+                        <select id="task-risk-level" class="form-control select-control">
+                          <option value="low">Low (general data)</option>
+                          <option value="medium" selected>Medium (emotional fatigue)</option>
+                          <option value="high">High (harmful content / intense emotional exposure)</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="task-fatigue-level">Repetition/focus burden</label>
+                        <select id="task-fatigue-level" class="form-control select-control">
+                          <option value="low">Low (quick, intuitive matching)</option>
+                          <option value="medium" selected>Medium (highly repetitive simple labeling)</option>
+                          <option value="high">High (intense visual focus and decision-making required)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="task-social-impact">Contribution of the task output</label>
+                      <input type="text" id="task-social-impact" class="form-control" placeholder="e.g. Improves training-data quality, contributing to more accurate and fair service development" value="">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="task-worker-context">Task flow (environment and things to note)</label>
+                      <input type="text" id="task-worker-context" class="form-control" placeholder="e.g. Repeatedly distinguishing small objects across many images in a short time" value="">
+                    </div>
+
+                    <div class="form-group reward-context-field" style="margin-top: 1rem;">
+                      <label for="task-reward">Completion reward</label>
+                      <div class="input-with-suffix">
+                        <input type="number" id="task-reward" class="form-control" step="0.05" min="0.10" value="" placeholder="1.50">
+                        <span class="input-suffix">USD</span>
+                      </div>
+                    </div>
+                    <div class="form-group time-limit-field" style="margin-top: 1rem;">
+                      <label for="task-time-limit">Task time limit</label>
+                      <div class="input-with-suffix">
+                        <input type="number" id="task-time-limit" class="form-control" step="1" min="1" max="180" value="" placeholder="15">
+                        <span class="input-suffix">min</span>
+                      </div>
+                    </div>
+
+                </div>
+
+                <div class="form-actions-sticky">
+                  <button id="btn-generate" class="btn btn-primary" style="width: 100%;">
+                    <i class="lucide-wand2"></i>Create Guidance Message
+                  </button>
+                  <button id="btn-reset-form" type="button" class="btn btn-secondary-quiet">
+                    <i class="lucide-rotate-ccw"></i>Reset
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right Column: Agentic Thought Logs & Generated Previews -->
+          <div class="ai-agent-panel">
+            <div class="glass-card" style="flex: 1; display: flex; flex-direction: column;">
+              <h3 class="section-title"><i class="lucide-eye"></i>Review & Edit Message</h3>
+              <p class="subtitle" style="margin-bottom: 1rem; font-size: 0.8rem;">Compare the generated candidate messages, then refine and apply only the final worker message.</p>
+
+              <div id="review-empty-state" class="review-empty-state">
+                <span class="empty-state-label">Not analyzed yet</span>
+                <i class="lucide-layout-template"></i>
+                <strong>No results yet.</strong>
+                <p>Enter the task information and message reference information on the left, then click <strong>Create Guidance Message</strong>. This area stays inactive until analysis is complete.</p>
+              </div>
+
+              <div id="generation-edit-notice" class="generation-edit-notice hidden" aria-live="polite">
+                <div><strong>You can still edit the settings while analysis is running.</strong><span>Applying your changes will cancel the current analysis and start over.</span></div>
+                <button id="btn-restart-generation" type="button" class="btn btn-secondary-quiet">Re-analyze with the changes</button>
+              </div>
+
+              <!-- Result Previews (Hidden on Initial Load) -->
+              <div id="preview-container" class="hidden">
+                <div id="psychology-factor-panel" class="psychology-factor-panel hidden">
+                  <div class="factor-panel-header">
+                    <div>
+                      <h4>Motivation-support messages generated to fit the task's characteristics</h4>
+                    </div>
+                  </div>
+                  <p class="factor-panel-desc">
+                    The agent checked the task's characteristics and the selected frames, then produced candidate messages. If needed, you can select from the candidates below and edit the final message directly.
+                  </p>
+                  <div class="message-context-summary" aria-label="Message Context">
+                    <dl>
+                      <div><dt>Task Characteristics</dt><dd id="factor-task-characteristics">—</dd></div>
+                      <div><dt>Emotional Load</dt><dd id="factor-context-risk">—</dd></div>
+                      <div><dt>Focus Load</dt><dd id="factor-context-fatigue">—</dd></div>
+                      <div><dt>Single Task Time</dt><dd id="factor-context-time">—</dd></div>
+                    </dl>
+                  </div>
+                  <div class="factor-grid">
+                    <div class="factor-block">
+                      <span class="factor-label">Task Characteristics</span>
+                      <div id="factor-task-types" class="factor-pill-list"></div>
+                    </div>
+                    <div class="factor-block">
+                      <span class="factor-label">Selected SDT Frames</span>
+                      <div id="factor-selected-frames" class="factor-pill-list"></div>
+                    </div>
+                    <div class="factor-block">
+                      <span class="factor-label">Psychological Burden</span>
+                      <ul id="factor-burdens" class="factor-list"></ul>
+                    </div>
+                    <div class="factor-block">
+                      <span class="factor-label">Motivational Factors</span>
+                      <ul id="factor-motivators" class="factor-list"></ul>
+                    </div>
+                  </div>
+                  <div id="review-criteria-list" class="review-criteria-list" aria-live="polite"></div>
+                </div>
+
+                <!-- Before Task Group: Final message, then its candidates -->
+                <div class="phase-group phase-group-before">
+                  <div class="intervention-item final-message-item">
+                    <div class="final-message-heading">
+                      <span class="intervention-badge badge-final">Final Pre-Task Message</span>
+                    </div>
+                    <textarea id="final-before-text" class="intervention-text-box final-text-box" rows="8" aria-label="Final pre-task motivational message"></textarea>
+                    <p class="final-message-guidance">Review the three candidate messages below, then edit and review the final message that will be delivered to workers.</p>
+                  </div>
+
+                  <div class="intervention-item">
+                    <span class="intervention-badge badge-before">Candidate Messages</span>
+                    <div id="before-options-select-group" class="option-select-grid" style="margin-bottom: 0.75rem;"></div>
+                    <textarea id="before-text" class="intervention-text-box" rows="5" aria-label="Pre-task motivational intervention message" readonly aria-readonly="true"></textarea>
+                  </div>
+                </div>
+
+                <!-- After Task Group: Final message, then its candidates -->
+                <div class="phase-group phase-group-after">
+                  <div class="intervention-item final-message-item">
+                    <div class="final-message-heading">
+                      <span class="intervention-badge badge-final">Final Post-Task Message</span>
+                    </div>
+                    <textarea id="final-after-text" class="intervention-text-box final-text-box" rows="8" aria-label="Final post-task message"></textarea>
+                  </div>
+
+                  <div class="intervention-item" hidden aria-hidden="true">
+                    <span class="intervention-badge badge-after">3 Post-Task Candidate Messages</span>
+                    <div id="after-options-select-group" class="option-select-grid" style="margin-bottom: 0.75rem;"></div>
+                    <textarea id="after-text" class="intervention-text-box" rows="5" aria-label="Post-task motivational intervention message" readonly aria-readonly="true"></textarea>
+                  </div>
+                </div>
+
+                <button id="btn-publish" class="btn btn-teal" style="width: 100%;">
+                  <i class="lucide-link"></i>Generate Task Link
+                </button>
+
+                <!-- Worker Access Link Panel -->
+                <div id="share-card" class="share-container worker-access-panel hidden">
+                  <div class="worker-access-panel-header">
+                    <div>
+                      <h4><i class="lucide-link"></i>Worker-only Link</h4>
+                      <p>Sharing this link lets the worker go straight to the task without passing through the requester screen.</p>
+                    </div>
+                    <span id="share-status-text" class="worker-access-status">Link created</span>
+                  </div>
+
+                  <label for="share-link-input" class="worker-access-label">Worker access URL</label>
+                  <div class="share-link-group">
+                    <input type="text" id="share-link-input" class="share-link-input" readonly value="">
+                    <button id="btn-copy-link" class="btn" title="Copy link"><i class="lucide-copy"></i></button>
+                  </div>
+
+                  <div class="worker-access-meta">
+                    <span><i class="lucide-check-circle2"></i> Reflects the current final message and task settings</span>
+                    <span id="share-created-at"></span>
+                  </div>
+
+                  <button id="btn-open-worker" class="btn btn-primary" style="margin-top: 0.25rem;">
+                    <i class="lucide-external-link"></i>Preview Worker Screen
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           CROWD WORKER VIEWPORT
+           ==================================================================== -->
+      <section id="worker-view" class="worker-container hidden">
+
+        <!-- Worker Task Error State -->
+        <div id="worker-task-error" class="glass-card hidden" style="text-align: center; padding: 3rem 1.5rem;">
+          <i class="lucide-alert-triangle" style="font-size: 3rem; color: var(--color-red); margin-bottom: 1rem;"></i>
+          <h3>No active crowdsourcing task found</h3>
+          <p class="subtitle" style="margin-bottom: 1.5rem;">The link may be incorrect, or the task has not been published yet. Please ask the requester for a new link.</p>
+        </div>
+
+        <!-- Worker Phase 1: Pre-Task Intrinsic Priming Card -->
+        <div id="worker-pre-task" style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+          <!-- Top Title Banner -->
+          <div class="glass-card" style="border: 1px solid var(--border-glass); padding: 1.25rem 1.75rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <span class="priming-badge" style="background: linear-gradient(135deg, var(--color-purple), var(--color-teal)); margin-bottom: 0;">Task Guide</span>
+                <h2 id="worker-task-title" style="font-size: 1.5rem; margin-bottom: 0;"></h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2-Column Responsive Layout for Motivation and Guidelines -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem; align-items: stretch;">
+
+            <!-- Left Card: Pre-task Motivational Prime -->
+            <div class="glass-card priming-text-card" style="display: flex; flex-direction: column; height: 100%; margin: 0; padding: 1.75rem;">
+              <h3 style="font-size: 1.15rem; color: var(--color-purple); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.5rem;">
+                <i class="lucide-heart-handshake"></i> Pre-Task Guidance Message
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.5;">Please read the guidance message before you start the task.</p>
+              <blockquote id="worker-motivation-prime" class="motivation-quote" style="margin: 0; padding: 0.5rem 1rem; border-left: 3px solid var(--color-purple); font-size: 0.98rem; line-height: 1.7; font-style: normal; flex: 1;"></blockquote>
+            </div>
+
+            <!-- Right Card: Guideline & Description -->
+            <div class="glass-card" style="display: flex; flex-direction: column; height: 100%; margin: 0; padding: 1.75rem;">
+              <h3 style="font-size: 1.15rem; color: var(--color-teal); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.5rem;">
+                <i class="lucide-file-text"></i> Task Instructions
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.5;">Please review the task criteria and exceptions before you begin.</p>
+              <div id="worker-task-desc" style="white-space: pre-wrap; font-size: 0.92rem; line-height: 1.6; flex: 1; overflow-y: auto; max-height: 380px; padding-right: 0.5rem;"></div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Actions -->
+          <div class="glass-card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap:1.5rem; flex-wrap: wrap;">
+            <div class="task-spec-grid" style="margin-top:0; flex:1; min-width:250px;">
+              <div class="spec-item">
+                <span class="spec-label">Completion Reward</span>
+                <span id="worker-spec-reward" class="spec-value" style="color: var(--color-teal); font-size:1.1rem;"></span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Task Time Limit</span>
+                <span id="worker-spec-time-limit" class="spec-value">15 min</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Quality Requirement</span>
+                <span class="spec-value" style="color: var(--color-amber);">Apply accurate criteria</span>
+              </div>
+            </div>
+            <button id="btn-start-task" class="btn btn-teal" style="font-size: 1.05rem; padding: 0.8rem 2.5rem;">
+              <i class="lucide-play-circle"></i> Start Task
+            </button>
+          </div>
+        </div>
+
+        <!-- Worker Phase 2: Active Labeling Workspace -->
+        <div id="worker-workspace" class="hidden">
+
+          <!-- Header Bar with Clock & Progress -->
+          <div class="workspace-header">
+            <div class="workspace-title-box">
+              <h3 id="workspace-task-title" style="font-size: 0.95rem; color: var(--text-secondary);"></h3>
+            </div>
+
+            <div class="workspace-stats">
+              <div class="stat-pill">
+                <i class="lucide-check-circle2" style="color: var(--color-teal);"></i>
+                <span>Completed: <strong id="label-progress-text" style="">0 / 10</strong></span>
+              </div>
+              <div class="stat-pill">
+                <i class="lucide-hourglass" style="color: var(--color-amber);"></i>
+                <span>Time left: <strong id="label-timer" style="font-family: monospace;">15:00</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Labeling Workspace Panels -->
+          <div class="workspace-grid">
+            <!-- Left Panel: Graphic Canvas -->
+            <div class="canvas-panel">
+              <div class="glass-card" style="padding: 1rem; display: flex; flex-direction: column;">
+                <div class="label-progress-bar" style="background: rgba(0,0,0,0.3); border-radius: 4px; height: 8px; margin-bottom: 1rem; overflow: hidden; border: 1px solid var(--border-glass);">
+                  <div id="progress-bar-inner" style="width: 0%; height: 100%; background: linear-gradient(to right, var(--color-purple), var(--color-teal)); transition: width 0.3s ease;"></div>
+                </div>
+
+                <div id="canvas-image-container" class="image-canvas-container">
+                  <!-- Vector SVGs inject here -->
+                </div>
+
+                <!-- Loading overlay spinner -->
+                <div id="canvas-loading" class="canvas-loading-overlay">
+                  <div class="spinner"></div>
+                  <p style="font-size: 0.8rem; color: var(--text-muted); font-family: monospace;">Aligning the annotation vectors for the next image...</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Panel: Annotation Questions, Second-Chance Banners, and Controls -->
+            <div class="controls-panel">
+              <div class="glass-card labeling-card" style="display:flex; flex-direction:column; justify-content:space-between; min-height: 310px;">
+                <div class="question-box">
+                  <h4 class="question-title" id="labeling-question">Check the example on screen and choose the option that fits best.</h4>
+                  <div id="options-wrapper" class="options-list">
+                    <!-- Option items generated via JS -->
+                  </div>
+                </div>
+
+                <div>
+                  <div class="action-row">
+                    <button id="btn-submit-annotation" class="btn btn-teal" disabled>
+                      <i class="lucide-check"></i> Submit Answer
+                    </button>
+                  </div>
+
+                  <span class="label-hint"><i class="lucide-info"></i> Submitting your choice moves you to the next item.</span>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Worker Phase 3: Post-Task completion screen -->
+        <div id="worker-post-task" class="glass-card hidden" style="text-align: center; padding: 3rem 2rem;">
+          <div class="success-header-circle">
+            <i class="lucide-award"></i>
+          </div>
+
+          <h2 class="gradient-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Task Complete!</h2>
+          <p class="subtitle" style="margin-bottom: 1.5rem;">The valuable data you submitted has been securely recorded in the research database.</p>
+
+          <!-- Post-task message generated by AI -->
+          <div id="post-task-message-text" class="post-task-message"></div>
+
+          <div class="worker-metrics-summary">
+            <div class="metric-box">
+              <div id="post-metric-reward" class="metric-num text-teal"></div>
+              <div class="metric-lbl">Approved Settlement Reward</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Floating Toast Notifications -->
+  <div id="toast-notice" class="toast-notice" role="alert" aria-live="assertive">
+    <i class="lucide-check-circle"></i>
+    <span id="toast-notice-text" class="toast-notice-text">Your task guidance settings are ready.</span>
+  </div>
+
+  <!-- App Custom Logic Scripts -->
+  <script>window.APP_LANG = "en";</script>
+  <script src="js/task-types.js?v=20260829-relatedness-v1"></script>
+  <script src="js/generator.js?v=20260829-relatedness-v1"></script>
+  <script src="js/app.js?v=20260829-relatedness-v1"></script>
+</body>
+</html>
